@@ -42,7 +42,7 @@ elements.searchForm.addEventListener('submit', e => {
 elements.searchResPages.addEventListener('click', e=>{
     const btn = e.target.closest('.btn-inline');
     if (btn) {
-        const goToPage = parseInt(btn.dataset.goto);
+        const goToPage = parseInt(btn.dataset.goto,10);
         console.log(btn);
         searchView.clearPrevResult();
         searchView.renderResults(state.search.recipe, goToPage);

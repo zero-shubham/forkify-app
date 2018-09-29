@@ -41,7 +41,7 @@ const render = (recipe) => {
 };
 
 const createButton = (type, page) => 
-    `<button class="btn-inline results__btn--${type} data-goto=${type === 'prev' ? page - 1 : page + 1}">
+    `<button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
         <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
         <svg class="search__icon">
             <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
@@ -52,9 +52,10 @@ const createButton = (type, page) =>
 const renderButtons = (currPage, pageLimit, totalRecipes)=>{
     const pages = totalRecipes/pageLimit;
     let btnHtml;
-    if(currPage=1){
+    //console.log(`currpage ${currPage}, totalpages ${pages}`);
+    if(currPage===1){
         btnHtml = createButton('next',currPage);
-    }else if(currPage==pages){
+    }else if(currPage===pages){
         btnHtml = createButton('prev',currPage);
     }else if(currPage>1 && pages>1){
         btnHtml = `
@@ -68,7 +69,7 @@ const renderButtons = (currPage, pageLimit, totalRecipes)=>{
 export const renderResults = (recipes,currPage=1,pageLimit=10) => {
     const start = (currPage-1)*pageLimit;
     const end = start + pageLimit;
-    console.log(recipes, currPage);
+    //console.log(recipes, currPage);
     recipes.slice(start, end).forEach(render);
 
     renderButtons(currPage, pageLimit, recipes.length);

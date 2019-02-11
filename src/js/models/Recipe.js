@@ -1,22 +1,24 @@
 import axios from 'axios';
 
-export default class Recipe{
-    constructor(id){
+
+export default class Recipe {
+    constructor(id) {
         this.id = id;
     }
 
     async getRecipe() {
-        const key = 'a8b7fcd1f5769389f0311dd72a9778b5';
-        try{
-            const res = await axios(`https://www.food2fork.com/api/get?key=${key}&rId=${this.id}`);
+        const proxy = 'https://cors-anywhere.herokuapp.com/';
+        const key = '92dcbf32d0e1c540cb1d7dad8936595b';
+        try {
+            const res = await axios(`${proxy}http://food2fork.com/api/get?key=${key}&rId=${this.id}`);
             this.title = res.data.recipe.title;
             this.author = res.data.recipe.publisher;
             this.img = res.data.recipe.image_url;
             this.url = res.data.recipe.source_url;
             this.ingredients = res.data.recipe.ingredients;
-        }
-        catch(err){
-            console.log(err);
+        } catch (error) {
+            console.log(error);
+            alert('Something went wrong :(');
         }
     }
 

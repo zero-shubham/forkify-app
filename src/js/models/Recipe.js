@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { key, proxy } from '../config';
 
 export default class Recipe {
     constructor(id) {
@@ -7,8 +7,6 @@ export default class Recipe {
     }
 
     async getRecipe() {
-        const proxy = 'https://cors-anywhere.herokuapp.com/';
-        const key = '92dcbf32d0e1c540cb1d7dad8936595b';
         try {
             const res = await axios(`${proxy}http://food2fork.com/api/get?key=${key}&rId=${this.id}`);
             this.title = res.data.recipe.title;
